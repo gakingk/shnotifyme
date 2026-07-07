@@ -1,6 +1,6 @@
 #!/bin/bash
 
-required=8192
+required=19000
 stable_seconds=30
 ok=0
 

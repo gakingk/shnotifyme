@@ -25,7 +25,7 @@ You can wait until there's a set amount of memory to run `your_script.sh` by usi
 ```
 bash shnotifyme/wait.sh your_script.sh
 ```
-The default memory to wait for is 8192, you can set this by changing the `required` parameter in `wait.sh`. It waits for 30 seconds when it gets enough memory as to not race with other possible upcoming proccesses
+The default memory to wait for is 19000 (MiB), you can set this by changing the `required` parameter in `wait.sh`. It waits for 30 seconds when it gets enough memory as to not race with other possible upcoming proccesses
 
 ## Combining `notify.sh` and `wait.sh`
 You can combine the functionality of notifying and waiting for memory by running:
