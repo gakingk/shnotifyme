@@ -1,6 +1,6 @@
 #!/bin/bash
 
-required=19000
+required=18000      # MB of free VRAM required
 stable_seconds=30
 ok=0
 
@@ -13,7 +13,7 @@ if [ -z "$SCRIPT" ]; then
 fi
 
 while (( ok < stable_seconds )); do
-    available=$(awk '/MemAvailable:/ {print int($2/1024)}' /proc/meminfo)
+    available=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | head -n1)
 
     if (( available >= required )); then
         ((ok++))
@@ -21,7 +21,12 @@ while (( ok < stable_seconds )); do
         ok=0
     fi
 
+    printf "\rFree VRAM: %5d MB | Stable: %2d/%d" "$available" "$ok" "$stable_seconds"
+
     sleep 1
 done
+
+echo
+echo "Starting $SCRIPT..."
 
 bash "$SCRIPT" "$@"
