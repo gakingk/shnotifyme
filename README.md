@@ -1,4 +1,4 @@
-# notifyme
+# shnotifyme
 
 Bash script that authenticates on your Google account via app password and sends yourself an e-mail when a bash scripts finishes running
 
