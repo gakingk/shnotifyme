@@ -5,6 +5,7 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/credentials.sh"
 
 SCRIPT="$1"
+shift
 
 if [ -z "$SCRIPT" ]; then
     echo "Usage: $0 <script.sh>"
@@ -13,7 +14,7 @@ fi
 
 start=$(date +%s)
 
-bash "$SCRIPT"
+bash "$SCRIPT" "$@"
 status=$?
 
 end=$(date +%s)
@@ -25,7 +26,7 @@ printf -v elapsed_fmt "%02d:%02d:%02d" \
     $((elapsed % 60))
 
 python "$SCRIPT_DIR/scripts/pynotify.py" \
-    --script "$(basename "$SCRIPT")" \
+    --script "$SCRIPT $@" \
     --status "$status" \
     --elapsed "$elapsed_fmt"
 
