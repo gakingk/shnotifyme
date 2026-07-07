@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source credentials.sh
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+source "$SCRIPT_DIR/credentials.sh"
 
 SCRIPT="$1"
 
@@ -22,7 +24,7 @@ printf -v elapsed_fmt "%02d:%02d:%02d" \
     $(((elapsed % 3600) / 60)) \
     $((elapsed % 60))
 
-python scripts/pynotify.py \
+python "$SCRIPT_DIR/scripts/pynotify.py" \
     --script "$(basename "$SCRIPT")" \
     --status "$status" \
     --elapsed "$elapsed_fmt"
